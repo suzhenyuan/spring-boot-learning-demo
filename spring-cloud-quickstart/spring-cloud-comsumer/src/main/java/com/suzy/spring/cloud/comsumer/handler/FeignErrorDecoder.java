@@ -14,6 +14,7 @@ public class FeignErrorDecoder implements ErrorDecoder{
 
 	public Exception decode(String methodKey, Response response) {
 		try {
+			System.out.println(response.headers().toString());
 			String body = IOUtils.toString(response.body().asInputStream());
 			System.out.println(body);
 			JSONObject m = JSONObject.parseObject(body);
