@@ -14,4 +14,7 @@ public interface ICalcService {
 	@RequestMapping(value = "/demo/calc", method = RequestMethod.POST)
 	CalcResult addItem(@RequestBody CalcDO calc, @RequestParam("desc") String desc);
 
+	@RequestMapping(value = "/demo/remoteExcept/{type}")
+	int remoteExcept(@RequestParam("type") int type);
+
 }
