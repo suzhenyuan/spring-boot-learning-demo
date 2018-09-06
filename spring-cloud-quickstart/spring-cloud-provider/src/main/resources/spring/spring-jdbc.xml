@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="
+    http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+    http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.0.xsd
+    http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd
+    http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.0.xsd">
+	   
+	<bean name="parentDataSource" class="org.logicalcobwebs.proxool.ProxoolDataSource"
+		abstract="true">
+		<property name="maximumConnectionCount" value="20" />
+		<property name="minimumConnectionCount" value="10" />
+		<property name="simultaneousBuildThrottle" value="5" />
+		<property name="trace" value="false" />
+		<property name="verbose" value="false" />
+	</bean>
+	
+	<!-- BI  -->
+	<bean id="biDataSource" parent="parentDataSource">
+		<property name="driver" value="com.mysql.jdbc.Driver" />
+		<property name="driverUrl">
+			<value>jdbc:mysql://127.0.0.1:3306/test?useUnicode=true&amp;characterEncoding=utf8&amp;zeroDateTimeBehavior=convertToNull</value>
+		</property>
+		<property name="user" value="root" />
+		<property name="password" value="root" />
+		<property name="alias" value="biDataSource"/>
+	</bean> 
+
+	<bean id="biJdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
+		<property name="dataSource" ref="biDataSource"></property>
+	</bean>
+
+	<bean id="transactionManager"
+		class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="biDataSource" />
+	</bean>
+
+	<tx:advice id="methodAdvice" transaction-manager="transactionManager">
+		<tx:attributes>
+			<tx:method name="save*" propagation="REQUIRED" rollback-for="Exception" />
+			<tx:method name="add*" propagation="REQUIRED" rollback-for="Exception" />
+			<tx:method name="create*" propagation="REQUIRED" rollback-for="Exception" />
+			<tx:method name="insert*" propagation="REQUIRED" rollback-for="Exception" />
+			<tx:method name="update*" propagation="REQUIRED" rollback-for="Exception" />
+			<tx:method name="merge*" propagation="REQUIRED" rollback-for="Exception" />
+			<tx:method name="del*" propagation="REQUIRED" />
+			<tx:method name="delete*" propagation="REQUIRED" rollback-for="Exception" />
+			<tx:method name="remove*" propagation="REQUIRED" />
+			<tx:method name="put*" propagation="REQUIRED" rollback-for="Exception" />
+			<tx:method name="get*" propagation="SUPPORTS" read-only="true" />
+			<tx:method name="count*" propagation="SUPPORTS" read-only="true" />
+			<tx:method name="find*" propagation="SUPPORTS" read-only="true" />
+			<tx:method name="query*" propagation="SUPPORTS" read-only="true" />
+			<tx:method name="list*" propagation="SUPPORTS" read-only="true" />
+			<!--<tx:method name="*" propagation="SUPPORTS" read-only="true" /> -->
+		</tx:attributes>
+	</tx:advice>
+
+	<aop:config>
+		<aop:pointcut id="interceptorPointCuts" expression="execution(* com.caifubao.bi.service..*.*(..)) " />
+		<aop:advisor advice-ref="methodAdvice" pointcut-ref="interceptorPointCuts" />
+	</aop:config>
+
+	<tx:annotation-driven transaction-manager="transactionManager" proxy-target-class="true" />
+	<aop:aspectj-autoproxy proxy-target-class="true" />
+</beans>
