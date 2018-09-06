@@ -1,6 +1,7 @@
 package com.suzy.spring.cloud.provider.controller;
 
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -9,38 +10,27 @@ import org.springframework.web.bind.annotation.RestController;
 import com.suzy.spring.cloud.common.BizException;
 import com.suzy.spring.cloud.common.CalcDO;
 import com.suzy.spring.cloud.common.CalcResult;
-
+<<<<<<< HEAD
+import com.suzy.spring.cloud.model.UserInfoDo;
+import com.suzy.spring.cloud.provider.dao.IUserInfoDao;
+=======
 import com.suzy.spring.cloud.common.service.ICalcService;
-
+>>>>>>> 788d3bc61249d38242510a70b07127d0dd07827a
 
 @RestController
 @RequestMapping("demo")
-public class DemoController {
 public class DemoController implements ICalcService{
 
+	@Autowired
+	private IUserInfoDao userInfoDao;
 	@RequestMapping("calc")
-	public CalcResult calc(@RequestBody CalcDO calc ,@RequestParam("desc") String desc) {
 	public CalcResult addItem(@RequestBody CalcDO calc ,@RequestParam("desc") String desc) {
 		System.out.println(desc);
 		CalcResult r = new CalcResult();
 		r.setZ(calc.getX()+calc.getY());
 		return r;
 	}
-
-
-
-
-	@RequestMapping(value = "remoteExcept/{type}")
-	public int remoteExcept(@RequestParam("type") int type) {
-		System.out.println("provider ’µΩ¡Àœ˚œ¢£∫"+type);
-		if(type==0){
-			throw new BizException(500,"∫ÛÃ®“Ï≥£");
-		}else if(type == 1){
-			throw new NullPointerException("ø’÷∏’Î“Ï≥£");
-		}
-		return type;
-	}
-
+<<<<<<< HEAD
 	@RequestMapping("saveUser")
 	public UserInfoDo saveUser(@RequestBody UserInfoDo userInfoDo){
 		return userInfoDao.saveUser(userInfoDo);
@@ -52,6 +42,17 @@ public class DemoController implements ICalcService{
 	@RequestMapping("findUser")
 	public UserInfoDo findUser(@RequestParam("id") int id){
 		return userInfoDao.findUser(id);
-	}
+=======
 
+	@RequestMapping(value = "remoteExcept/{type}")
+	public int remoteExcept(@RequestParam("type") int type) {
+		System.out.println("providerÊî∂Âà∞‰∫ÜÊ∂àÊÅØÔºö"+type);
+		if(type==0){
+			throw new BizException(500,"ÂêéÂè∞ÂºÇÂ∏∏");
+		}else if(type == 1){
+			throw new NullPointerException("Á©∫ÊåáÈíàÂºÇÂ∏∏");
+		}
+		return type;
+>>>>>>> 788d3bc61249d38242510a70b07127d0dd07827a
+	}
 }

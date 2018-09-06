@@ -24,6 +24,10 @@ public class ComsumerController {
 		CalcResult r = calcService.addItem(c, "this is a demo");
 		return r.getZ();
 	}
+	@RequestMapping("remoteExcept/{type}")
+	public int remoteExcept(int type){
+		return calcService.remoteExcept(type);
+	}
 	
 }
 
