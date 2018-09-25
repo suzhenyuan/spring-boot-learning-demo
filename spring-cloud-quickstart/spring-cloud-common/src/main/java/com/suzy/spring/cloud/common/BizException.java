@@ -1,5 +1,7 @@
 package com.suzy.spring.cloud.common;
 
+import com.suzy.spring.cloud.model.UserInfoDo;
+
 public class BizException extends RuntimeException {
 
 	/**
@@ -19,6 +21,10 @@ public class BizException extends RuntimeException {
 		this.msg = msg;
 	}
 	
+	public BizException(int i, String string, Object lu) {
+		this(i,string);
+	}
+
 	@Override
 	public Throwable fillInStackTrace(){
 		return this;

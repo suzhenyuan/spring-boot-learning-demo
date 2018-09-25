@@ -32,7 +32,7 @@
 	<bean id="biJdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
 		<property name="dataSource" ref="biDataSource"></property>
 	</bean>
-
+<!-- 
 	<bean id="transactionManager"
 		class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
 		<property name="dataSource" ref="biDataSource" />
@@ -55,10 +55,12 @@
 			<tx:method name="find*" propagation="SUPPORTS" read-only="true" />
 			<tx:method name="query*" propagation="SUPPORTS" read-only="true" />
 			<tx:method name="list*" propagation="SUPPORTS" read-only="true" />
-			<!--<tx:method name="*" propagation="SUPPORTS" read-only="true" /> -->
+			
 		</tx:attributes>
 	</tx:advice>
-
+	-->
+<!--<tx:method name="*" propagation="SUPPORTS" read-only="true" /> -->
+<!-- 
 	<aop:config>
 		<aop:pointcut id="interceptorPointCuts" expression="execution(* com.caifubao.bi.service..*.*(..)) " />
 		<aop:advisor advice-ref="methodAdvice" pointcut-ref="interceptorPointCuts" />
@@ -66,4 +68,5 @@
 
 	<tx:annotation-driven transaction-manager="transactionManager" proxy-target-class="true" />
 	<aop:aspectj-autoproxy proxy-target-class="true" />
+	 -->
 </beans>

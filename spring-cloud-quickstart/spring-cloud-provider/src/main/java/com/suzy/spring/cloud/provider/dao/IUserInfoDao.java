@@ -10,4 +10,6 @@ public interface IUserInfoDao {
 
 	UserInfoDo findUser(int id);
 
+	UserInfoDo queryLastUser();
+
 }

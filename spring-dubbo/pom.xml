@@ -5,7 +5,7 @@
 	<parent>
 		<groupId>com.suzy</groupId>
 		<artifactId>spring-boot-learning-demo</artifactId>
-		<version>${project.version}</version>
+		<version>0.0.1-SNAPSHOT</version>
 	</parent>
 	<artifactId>spring-dubbo</artifactId>
 	<packaging>pom</packaging>

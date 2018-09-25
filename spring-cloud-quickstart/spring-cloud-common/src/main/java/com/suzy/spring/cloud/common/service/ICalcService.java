@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.suzy.spring.cloud.common.CalcDO;
 import com.suzy.spring.cloud.common.CalcResult;
+import com.suzy.spring.cloud.model.UserInfoDo;
 
 @FeignClient("demo-spring-provider")
 public interface ICalcService {
@@ -17,4 +18,16 @@ public interface ICalcService {
 	@RequestMapping(value = "/demo/remoteExcept/{type}")
 	int remoteExcept(@RequestParam("type") int type);
 
+	@RequestMapping(value = "/demo/saveUser")
+	UserInfoDo saveUser(@RequestBody UserInfoDo userInfoDo);
+
+	@RequestMapping(value = "/demo/updateUser")
+	UserInfoDo updateUser(@RequestBody UserInfoDo userInfoDo);
+
+	@RequestMapping(value = "/demo/findUser")
+	UserInfoDo findUser(@RequestParam("id") int id);
+	@RequestMapping(value = "/demo/findLastUser")
+	UserInfoDo findLastUser();
+	@RequestMapping(value = "/demo/saveUserException")
+	UserInfoDo saveUserException(@RequestBody UserInfoDo user);
 }

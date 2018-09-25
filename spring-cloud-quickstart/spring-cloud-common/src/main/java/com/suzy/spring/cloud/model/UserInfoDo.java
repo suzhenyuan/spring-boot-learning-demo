@@ -11,25 +11,24 @@ public class UserInfoDo implements Serializable{
 
 	
 	private Integer id;
-	private String userName;
-	private String desc;
+	private String name;
+	private String remark;
 	public Integer getId() {
 		return id;
 	}
 	public void setId(Integer id) {
 		this.id = id;
 	}
-	public String getUserName() {
-		return userName;
+	public String getName() {
+		return name;
 	}
-	public void setUserName(String userName) {
-		this.userName = userName;
+	public void setName(String name) {
+		this.name = name;
 	}
-	public String getDesc() {
-		return desc;
+	public String getRemark() {
+		return remark;
 	}
-	public void setDesc(String desc) {
-		this.desc = desc;
+	public void setRemark(String remark) {
+		this.remark = remark;
 	}
-	
 }

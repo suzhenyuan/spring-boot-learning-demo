@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
 import com.alibaba.fastjson.JSONObject;
-import com.github.andrewoma.dexx.collection.Map;
 import com.suzy.spring.cloud.common.BizException;
 
 import feign.FeignException;
