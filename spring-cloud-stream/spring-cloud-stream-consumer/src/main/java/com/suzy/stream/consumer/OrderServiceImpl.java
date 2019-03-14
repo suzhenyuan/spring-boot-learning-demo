@@ -15,7 +15,7 @@ public class OrderServiceImpl {
 	@StreamListener(OrderMessage.CONSUMER)
 	public void process(Message<OrderInfo> message) {
 		OrderInfo o = message.getPayload();
-		
+
 		System.out.println(o.getAge());
 		System.out.println(o.getName());
 		System.out.println(o.isModify());

@@ -15,6 +15,10 @@ public class ProviderService {
 	OrderMessage orderMessage;
 	public String sendOrderInfo(OrderInfo info) {
 		Message<OrderInfo> m=MessageBuilder.withPayload(info).build();
-		return orderMessage.sender().send(m)+"";
+		if (orderMessage.sender().send(m)) {
+			return m.getHeaders().getId().toString()+";"+m.getHeaders().getTimestamp();
+		}else{
+			return "send failure";
+		}
 	}
 }
